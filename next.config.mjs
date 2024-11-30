@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'gamerecord-online.vercel.app',
+        hostname: 'g7ttfzigvkyrt3gn.public.blop.vercel-storage.com',
         port: '',
         pathname: '/**',
       },
