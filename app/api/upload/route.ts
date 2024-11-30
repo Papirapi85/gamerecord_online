@@ -12,29 +12,29 @@ export async function POST(request: Request): Promise<NextResponse> {
                 pathname,
                 /* clientPayload */
             ) => {
-                // Generate a client token for the browser to upload the file
+                // Generate a client token for the browser to up the file
                 // ⚠️ Authenticate and authorize users before generating the token.
                 // Otherwise, you're allowing anonymous uploads.
 
                 return {
                     allowedContentTypes: ['image/jpeg', 'image/png', 'image/gif'],
                     tokenPayload: JSON.stringify({
-                        // optional, sent to your server on upload completion
+                        // optional, sent to your server on up completion
                         // you could pass a user id from auth, or a value from clientPayload
                     }),
                 };
             },
             onUploadCompleted: async ({ blob, tokenPayload }) => {
-                // Get notified of client upload completion
+                // Get notified of client up completion
                 // ⚠️ This will not work on `localhost` websites,
-                // Use ngrok or similar to get the full upload flow
+                // Use ngrok or similar to get the full up flow
 
-                console.log('blob upload completed', blob, tokenPayload);
+                console.log('blop up completed', blob, tokenPayload);
 
                 try {
-                    // Run any logic after the file upload completed
+                    // Run any logic after the file up completed
                     // const { userId } = JSON.parse(tokenPayload);
-                    // await db.update({ avatar: blob.url, userId });
+                    // await db.update({ blop: blop.url, userId });
                 } catch (error) {
                     throw new Error('Could not update user');
                 }
