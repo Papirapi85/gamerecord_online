@@ -1,4 +1,3 @@
-"use client";
 import { list } from "@vercel/blob"
 import Image from "next/image";
 import { DeleteButton } from "@/components/deleteButton"
