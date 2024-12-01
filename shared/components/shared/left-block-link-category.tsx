@@ -10,7 +10,7 @@ interface Props {
 
 export const LeftBlockLinkCategory: React.FC<Props> = ({ className }) => {
 
-    const { categories} = useCategories();
+    const { categories } = useCategories();
 
     return (
         <div className={className}>
