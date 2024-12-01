@@ -1,4 +1,4 @@
-import { list } from "@vercel/blob"
+import {list} from "@vercel/blob"
 import Image from "next/image";
 import { DeleteButton } from "@/components/deleteButton"
 import {Container, LeftBlockLinkCategory, ProductsGroupList} from "@/shared/components";
@@ -17,11 +17,10 @@ export default async function AllFilesPage() {
                     <div className="w-[250px]">
                         <Suspense>
                             {/*<Filters />*/}
-                            <LeftBlockLinkCategory />
+                            <LeftBlockLinkCategory/>
                         </Suspense>
                     </div>
 
-                    {/* Список товаров */}
                     <div className="flex-1">
                         <div className="flex flex-col gap-16">
                             {blops.blobs.map((blop, i) => (
@@ -35,7 +34,7 @@ export default async function AllFilesPage() {
                                         />
                                     </a>
 
-                                    <DeleteButton url={blop.url} />
+                                    <DeleteButton url={blop.url}/>
                                 </div>
                             ))}
                         </div>
@@ -44,6 +43,4 @@ export default async function AllFilesPage() {
             </Container>
         </div>
     )
-
-
 }
