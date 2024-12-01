@@ -13,6 +13,7 @@ import {NextResponse} from "next/server";
 // }
 
 // https://youtu.be/kQfwNwpDiPQ 35:20
+export const dynamic = 'force-dynamic';
 export async function DELETE(request: Request, context : any) {
     const {params} = context;
     let { url } = params;
