@@ -78,12 +78,12 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
               </Button>
             </Link>
 
-          <a href="/blop/all">
+          <Link href="/blop/all">
             <Button variant="outline" className="gap-2">
               {/*<ArrowLeft/>*/}
               IMAGE VIEW
             </Button>
-          </a>
+          </Link>
             {/*<a href="">*/}
             {/*  <Button variant="outline" className="text-gray-500 border-gray-400 hover:bg-gray-50">*/}
             {/*    Обновить*/}

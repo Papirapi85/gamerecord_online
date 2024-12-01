@@ -26,7 +26,7 @@ export default async function AllFilesPage() {
                             {blops.blobs.map((blop, i) => (
                                 <div key={blop.pathname + i}>
                                     <a href={blop.url} target="_blank">
-                                        <Image
+                                        <img
                                             src={blop.url}
                                             alt={blop.pathname}
                                             width={700}
