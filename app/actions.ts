@@ -203,12 +203,8 @@ export async function registerUser(body: Prisma.UserCreateInput) {
 }
 
 
-
-export async function createBlogAction(data: { newBlob: PutBlobResult }) {
-  // TODO: validate the data
-
+export async function createBlopAction(data: { newBlob: PutBlobResult }) {
   let post
-
   try {
     post = await prisma.post.create({
       data: {
@@ -228,6 +224,24 @@ export async function createBlogAction(data: { newBlob: PutBlobResult }) {
   }
 
   revalidatePath('/')
-  // redirect(`/blob/all/${post.slug}`)
-  redirect(`/blop/all`)
+  // redirect(`/blob/list/${post.slug}`)
+  redirect(`/blop/list-data`)
 }
+
+export async function deleteBlopAction(data: {id : Number}) {
+  let post
+  try {
+    post = await prisma.post.delete({
+      where: {
+        id: Number(data.id),
+      },
+    });
+    if (!post) {
+      return { error: 'No Delete' }
+    }
+  }catch (e) {
+
+  }
+}
+
+

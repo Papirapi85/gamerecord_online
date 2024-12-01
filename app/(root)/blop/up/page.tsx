@@ -2,19 +2,14 @@
 
 import type { PutBlobResult } from '@vercel/blob';
 import {useState, useRef, ChangeEvent, Suspense} from 'react';
-import { createBlogAction } from '@/app/actions'
+import {createBlopAction} from '@/app/actions'
 import toast from "react-hot-toast";
 import {Container, LeftBlockLinkCategory} from "@/shared/components";
-import Image from "next/image";
-import {DeleteButton} from "@/components/deleteButton";
+
 
 export default function AvatarUploadPage() {
     const inputFileRef = useRef<HTMLInputElement>(null);
     const [blob, setBlob] = useState<PutBlobResult | null>(null);
-
-    const [title, setTitle] = useState('22222')
-    const [slug, setSlug] = useState('22222')
-    const [content, setContent] = useState<string>('')
 
     return (
         <Container className="mt-10 pb-14">
@@ -22,7 +17,6 @@ export default function AvatarUploadPage() {
                 {/* Фильтрация */}
                 <div className="w-[250px]">
                     <Suspense>
-                        {/*<Filters />*/}
                         <LeftBlockLinkCategory />
                     </Suspense>
                 </div>
@@ -50,10 +44,9 @@ export default function AvatarUploadPage() {
 
                                 const newBlob = (await response.json()) as PutBlobResult;
                                 setBlob(newBlob);
-                                setContent(newBlob.url)
 
-
-                                const result = await createBlogAction({ newBlob })
+                                // add database url
+                                const result = await createBlopAction({ newBlob })
 
                                 if (result?.error) {
                                     toast.error(result.error)

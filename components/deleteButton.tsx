@@ -1,8 +1,12 @@
 "use client";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
+import {deleteBlopAction} from "@/app/actions";
+import toast from "react-hot-toast";
 
-export function DeleteButton({url} : { url: string}) {
+
+
+export function DeleteButton({url, id}: { url: string, id: number }) {
 
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
@@ -14,6 +18,13 @@ export function DeleteButton({url} : { url: string}) {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
             });
+
+            const result = await deleteBlopAction({ id })
+
+            if (result?.error) {
+                toast.error(result.error)
+            }
+
             setIsLoading(false);
             router.refresh();
         }catch (e) {

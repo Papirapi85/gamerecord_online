@@ -70,25 +70,42 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
         {/* Правая часть */}
         <div className="flex items-center gap-3">
 
+          <Link href="/test">
+            <Button variant="outline" className="gap-2">
+              test
+            </Button>
+          </Link>
 
             <Link href="/blop/up">
               <Button variant="outline" className="gap-2">
-                {/*<ArrowLeft/>*/}
-                IMAGE ADD
+                blop up
               </Button>
             </Link>
 
-          <Link href="/blop/all">
+          <Link href="/blop/list">
             <Button variant="outline" className="gap-2">
-              {/*<ArrowLeft/>*/}
-              IMAGE VIEW
+              blop list
             </Button>
           </Link>
-            {/*<a href="">*/}
-            {/*  <Button variant="outline" className="text-gray-500 border-gray-400 hover:bg-gray-50">*/}
-            {/*    Обновить*/}
-            {/*  </Button>*/}
-            {/*</a>*/}
+
+          <Link href="/blop/list-data">
+            <Button variant="outline" className="gap-2">
+              blop list-data
+            </Button>
+          </Link>
+
+          <Link href="/api/blop/get">
+            <Button variant="outline" className="gap-2">
+              api blop get
+            </Button>
+          </Link>
+
+
+          {/*<a href="">*/}
+          {/*  <Button variant="outline" className="text-gray-500 border-gray-400 hover:bg-gray-50">*/}
+          {/*    Обновить*/}
+          {/*  </Button>*/}
+          {/*</a>*/}
 
         <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)}/>
 

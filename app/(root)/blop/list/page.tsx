@@ -25,16 +25,12 @@ export default async function AllFilesPage() {
                         <div className="flex flex-col gap-16">
                             {blops.blobs.map((blop, i) => (
                                 <div key={blop.pathname + i}>
-                                    <a href={blop.url} target="_blank">
-                                        <img
+                                        <Image
                                             src={blop.url}
                                             alt={blop.pathname}
                                             width={700}
                                             height={500}
                                         />
-                                    </a>
-
-                                    <DeleteButton url={blop.url}/>
                                 </div>
                             ))}
                         </div>
