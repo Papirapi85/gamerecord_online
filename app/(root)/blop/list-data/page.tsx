@@ -7,6 +7,7 @@ import {useRouter} from "next/navigation";
 import {prisma} from "@/prisma/prisma-client";
 import {DeleteButton} from "@/components/deleteButton";
 
+export const dynamic = 'force-dynamic';
 export default async function BlopListDataPage() {
 
     const post = await prisma.post.findMany();
