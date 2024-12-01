@@ -11,6 +11,11 @@ import { hashSync } from 'bcrypt';
 import { cookies } from 'next/headers';
 import toast from "react-hot-toast";
 
+// BLOP
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
+import {PutBlobResult} from "@vercel/blob";
+
 
 
 export async function createOrder(data: CheckoutFormValues) {
@@ -195,4 +200,34 @@ export async function registerUser(body: Prisma.UserCreateInput) {
     console.log('Error [CREATE_USER]', err);
     throw err;
   }
+}
+
+
+
+export async function createBlogAction(data: { newBlob: PutBlobResult }) {
+  // TODO: validate the data
+
+  let post
+
+  try {
+    post = await prisma.post.create({
+      data: {
+        content: data.newBlob.url,
+      }
+    })
+
+    if (!post) {
+      return { error: 'Failed to create the blog.' }
+    }
+  } catch (error: any) {
+    if (error.code === 'P2002') {
+      return { error: 'That slug already exists.' }
+    }
+
+    return { error: error.message || 'Failed to create the blog.' }
+  }
+
+  revalidatePath('/')
+  // redirect(`/blob/all/${post.slug}`)
+  redirect(`/blop/all`)
 }

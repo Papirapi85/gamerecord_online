@@ -11,6 +11,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { ProfileButton } from './profile-button';
 import { AuthModal } from './modals';
+import {Button} from "@/shared/components";
+import {ArrowLeft} from "lucide-react";
 
 interface Props {
   hasSearch?: boolean;
@@ -51,7 +53,7 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
         {/* Левая часть */}
         <Link href="/">
           <div className="flex items-center gap-4">
-            <Image src="/logo.png" alt="Logo" width={35} height={35} />
+            <Image src="/logo.png" alt="Logo" width={35} height={35}/>
             <div>
               <h1 className="text-2xl uppercase font-black">GAME RECORD ONLINE</h1>
               <p className="text-sm text-gray-400 leading-3">рекорды одиночных заездов</p>
@@ -67,13 +69,35 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
 
         {/* Правая часть */}
         <div className="flex items-center gap-3">
-          <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)} />
 
-          <ProfileButton onClickSignIn={() => setOpenAuthModal(true)} />
 
-          {/*{hasCart && <CartButton />}*/}
-        </div>
-      </Container>
-    </header>
-  );
+            <Link href="/blop/up">
+              <Button variant="outline" className="gap-2">
+                {/*<ArrowLeft/>*/}
+                BLOP UP
+              </Button>
+            </Link>
+
+          <Link href="/blop/all">
+            <Button variant="outline" className="gap-2">
+              {/*<ArrowLeft/>*/}
+              BLOP GET DEL
+            </Button>
+          </Link>
+            {/*<a href="">*/}
+            {/*  <Button variant="outline" className="text-gray-500 border-gray-400 hover:bg-gray-50">*/}
+            {/*    Обновить*/}
+            {/*  </Button>*/}
+            {/*</a>*/}
+
+        <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)}/>
+
+        <ProfileButton onClickSignIn={() => setOpenAuthModal(true)}/>
+
+        {/*{hasCart && <CartButton />}*/}
+      </div>
+    </Container>
+</header>
+)
+  ;
 };

@@ -12,7 +12,6 @@ export default async function Page() {
         <section>
             {images.blobs.map((image) => (
                 <Image
-                    priority
                     key={image.pathname}
                     src={image.url}
                     alt="Image"

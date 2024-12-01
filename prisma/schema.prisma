@@ -172,6 +172,13 @@ model StoryItem {
   createdAt DateTime @default(now())
 }
 
+model Post {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 enum OrderStatus {
   PENDING
   SUCCEEDED
