@@ -30,13 +30,13 @@ export default async function BlopListDataPage() {
                             <li key={post.id}>
                                 <div className='flex items-center justify-between'>
                                     <Link href={post.content} target='_blank'>
-                                        <img
+                                        <Image
                                             src={post.content}
                                             alt={post.content}
-                                            width={500}
-                                            height={300}
+                                            width={800}
+                                            height={600}
                                         >
-                                        </img>
+                                        </Image>
                                     </Link>
                                     <DeleteButton url={post.content} id={post.id} />
                                 </div>

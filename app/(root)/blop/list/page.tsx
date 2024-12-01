@@ -26,6 +26,7 @@ export default async function AllFilesPage() {
                         <div className="flex flex-col gap-16">
                             {blops.blobs.map((blop, i) => (
                                 <div key={blop.pathname + i}>
+                                    {blop.pathname}
                                         <Image
                                             src={blop.url}
                                             alt={blop.pathname}
