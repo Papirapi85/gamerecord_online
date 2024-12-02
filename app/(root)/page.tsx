@@ -14,13 +14,14 @@ import { GetSearchParams, findPizzas } from '@/shared/lib/find-pizzas';
 export default async function Home({ searchParams }: { searchParams: GetSearchParams }) {
   const categories = await findPizzas(searchParams);
 
+  // @ts-ignore
   return (
     <>
       {/*<Container className="mt-10">*/}
       {/*  <Title text="Все пиццы" size="lg" className="font-extrabold" />*/}
       {/*</Container>*/}
 
-      <TopBar categories={categories.filter((category) => category.products.length > 0)} />
+
 
       {/*<Stories />*/}
 
@@ -32,8 +33,8 @@ export default async function Home({ searchParams }: { searchParams: GetSearchPa
           <div className="w-[250px]">
             <Suspense>
               {/*<Filters />*/}
-
-                <LeftBlockLinkCategory />
+              <TopBar categories={categories.filter((category) => category.products.length > 0)} />
+                {/*<LeftBlockLinkCategory />*/}
             </Suspense>
           </div>
 

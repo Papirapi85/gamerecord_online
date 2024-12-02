@@ -10,8 +10,6 @@ import { OrderStatus, Prisma } from '@prisma/client';
 import { hashSync } from 'bcrypt';
 import { cookies } from 'next/headers';
 import toast from "react-hot-toast";
-
-// BLOP
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import {PutBlobResult} from "@vercel/blob";
