@@ -33,6 +33,7 @@ export default async function AllFilesPage() {
                                             width={700}
                                             height={500}
                                         />
+                                    <DeleteButton url={blop.url} id={0} />
                                 </div>
                             ))}
                         </div>

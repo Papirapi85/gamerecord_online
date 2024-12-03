@@ -19,7 +19,8 @@ export function DeleteButton({url, id}: { url: string, id: number }) {
                 headers: { 'Content-Type': 'application/json' },
             });
 
-            const result = await deleteBlopAction({ id })
+
+            const result = await deleteBlopAction({id})
 
             if (result?.error) {
                 toast.error(result.error)

@@ -1,7 +1,7 @@
 import { Nunito } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/shared/components/shared/providers';
-import { ThemeProvider } from "@/components/theme-provider"
+
 
 const nunito = Nunito({
   subsets: ['cyrillic'],
@@ -20,19 +20,11 @@ export default function RootLayout({
         <link data-rh="true" rel="icon" href="/logo.png" />
       </head>
       <body className={nunito.className}>
-
-      <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-      >
           <Providers>
               <main>
                   {children}
               </main>
           </Providers>
-      </ThemeProvider>
       </body>
     </html>
   );

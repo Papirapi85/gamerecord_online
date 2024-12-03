@@ -21,7 +21,7 @@ export default async function Home({ searchParams }: { searchParams: GetSearchPa
       {/*  <Title text="Все пиццы" size="lg" className="font-extrabold" />*/}
       {/*</Container>*/}
 
-
+      {/*<TopBar categories={categories.filter((category) => category.products.length > 0)} />*/}
 
       {/*<Stories />*/}
 
@@ -30,13 +30,13 @@ export default async function Home({ searchParams }: { searchParams: GetSearchPa
       <Container className="mt-10 pb-14">
         <div className="flex gap-[80px]">
           {/* Фильтрация */}
-          <div className="w-[250px]">
-            <Suspense>
-              {/*<Filters />*/}
-              <TopBar categories={categories.filter((category) => category.products.length > 0)} />
-                {/*<LeftBlockLinkCategory />*/}
-            </Suspense>
-          </div>
+          {/*<div className="w-[250px]">*/}
+          {/*  <Suspense>*/}
+          {/*    /!*<Filters />*!/*/}
+
+          {/*      /!*<LeftBlockLinkCategory />*!/*/}
+          {/*  </Suspense>*/}
+          {/*</div>*/}
 
           {/* Список товаров */}
           <div className="flex-1">
