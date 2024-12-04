@@ -71,30 +71,30 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
 
         {/* Правая часть */}
         <div className="flex items-center gap-3">
-          <ModeToggle/>
-          <Link href="/test">
-            <Button variant="outline" className="gap-2">
-              test
-            </Button>
-          </Link>
+          {/*<ModeToggle/>*/}
+          {/*<Link href="/test">*/}
+          {/*  <Button variant="outline" className="gap-2">*/}
+          {/*    test*/}
+          {/*  </Button>*/}
+          {/*</Link>*/}
 
-            <Link href="/blop/up">
-              <Button variant="outline" className="gap-2">
-                blop up
-              </Button>
-            </Link>
+            {/*<Link href="/blop/up">*/}
+            {/*  <Button variant="outline" className="gap-2">*/}
+            {/*    blop up*/}
+            {/*  </Button>*/}
+            {/*</Link>*/}
 
-          <Link href="/blop/list">
-            <Button variant="outline" className="gap-2">
-              blop list
-            </Button>
-          </Link>
+          {/*<Link href="/blop/list">*/}
+          {/*  <Button variant="outline" className="gap-2">*/}
+          {/*    blop list*/}
+          {/*  </Button>*/}
+          {/*</Link>*/}
 
-          <Link href="/blop/list-data">
-            <Button variant="outline" className="gap-2">
-              blop list-data
-            </Button>
-          </Link>
+          {/*<Link href="/blop/list-data">*/}
+          {/*  <Button variant="outline" className="gap-2">*/}
+          {/*    blop list-data*/}
+          {/*  </Button>*/}
+          {/*</Link>*/}
 
           {/*<Link href="/api/blop/get">*/}
           {/*  <Button variant="outline" className="gap-2">*/}
