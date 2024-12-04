@@ -12,9 +12,9 @@ interface Props {
 
 export const TopBar: React.FC<Props> = ({ categories, className }) => {
     return (
-        <div className={cn('sticky top-0 py-1 dark:bg-gray-900 shadow-lg shadow-black/5 z-10', className)}>
+        <div className={cn('sticky top-0 bg-gray-900 py-2 shadow-lg shadow-black/5 z-10', className)}>
             <Container className="flex items-center justify-between ">
-                <Categories items={categories}/>
+                <Categories items={categories} />
                 {/*<SortPopup />*/}
             </Container>
         </div>

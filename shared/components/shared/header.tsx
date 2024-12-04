@@ -13,6 +13,7 @@ import { ProfileButton } from './profile-button';
 import { AuthModal } from './modals';
 import {Button} from "@/shared/components";
 import {ArrowLeft} from "lucide-react";
+import {ModeToggle} from "@/components/buttonTheme";
 
 
 interface Props {
@@ -70,7 +71,7 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
 
         {/* Правая часть */}
         <div className="flex items-center gap-3">
-
+          <ModeToggle/>
           <Link href="/test">
             <Button variant="outline" className="gap-2">
               test

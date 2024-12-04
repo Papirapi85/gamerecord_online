@@ -21,7 +21,7 @@ export default async function Home({ searchParams }: { searchParams: GetSearchPa
       {/*  <Title text="Все пиццы" size="lg" className="font-extrabold" />*/}
       {/*</Container>*/}
 
-      {/*<TopBar categories={categories.filter((category) => category.products.length > 0)} />*/}
+      <TopBar categories={categories.filter((category) => category.products.length > 0)} />
 
       {/*<Stories />*/}
 
