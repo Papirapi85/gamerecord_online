@@ -51,14 +51,14 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
 
   return (
     <header className={cn('border-b', className)}>
-      <Container className="flex items-center justify-between py-8">
+      <Container className="flex items-center justify-between py-3">
         {/* Левая часть */}
         <Link href="/">
           <div className="flex items-center gap-4">
-            <Image src="/logo.png" alt="Logo" width={35} height={35}/>
+            <Image src="/logo.webp" alt="Logo" width={65} height={65}/>
             <div>
-              <h1 className="text-2xl uppercase font-black">GAME RECORD ONLINE</h1>
-              <p className="text-sm text-gray-400 leading-3">рекорды одиночных заездов</p>
+              <h1 className="text-2xl uppercase font-black">GAME RECORD</h1>
+              <p className="text-sm text-gray-400 leading-3">ONLINE</p>
             </div>
           </div>
         </Link>
@@ -71,7 +71,7 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
 
         {/* Правая часть */}
         <div className="flex items-center gap-3">
-          {/*<ModeToggle/>*/}
+          <ModeToggle/>
           {/*<Link href="/test">*/}
           {/*  <Button variant="outline" className="gap-2">*/}
           {/*    test*/}

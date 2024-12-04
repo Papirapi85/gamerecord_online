@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link data-rh="true" rel="icon" href="/logo.png" />
+        {/*<link data-rh="true" rel="icon" href="/logo.webp" />*/}
       </head>
       <body className={nunito.className}>
           <Providers>
