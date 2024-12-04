@@ -4,15 +4,7 @@ import { Title } from './title';
 import { Button } from '../ui';
 import { Plus } from 'lucide-react';
 import { Ingredient } from '@prisma/client';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/shared/components/ui/table"
+
 
 interface Props {
   id: number;
