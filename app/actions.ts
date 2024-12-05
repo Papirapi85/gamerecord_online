@@ -18,7 +18,7 @@ import {PutBlobResult} from "@vercel/blob";
 
 export async function createOrder(data: CheckoutFormValues) {
   try {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const cartToken = cookieStore.get('cartToken')?.value;
 
     if (!cartToken) {

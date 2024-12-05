@@ -1,27 +1,21 @@
 import {
   Container,
-  Filters,
-  Title,
   TopBar,
-  ProductsGroupList,
-  Stories,
-  LeftBlockLinkCategory
 } from '@/shared/components/shared';
-import { Suspense } from 'react';
-import { GetSearchParams, findPizzas } from '@/shared/lib/find-pizzas';
 
 
-export default async function Home({ searchParams }: { searchParams: GetSearchParams }) {
-  const categories = await findPizzas(searchParams);
 
-  // @ts-ignore
+export default async function Home() {
+
+
+
   return (
     <>
       {/*<Container className="mt-10">*/}
       {/*  <Title text="Все пиццы" size="lg" className="font-extrabold" />*/}
       {/*</Container>*/}
 
-      <TopBar categories={categories.filter((category) => category.products.length > 0)} />
+      <TopBar />
 
       {/*<Stories />*/}
 
