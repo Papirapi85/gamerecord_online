@@ -14,6 +14,7 @@ import { AuthModal } from './modals';
 import {Button} from "@/shared/components";
 import {ArrowLeft} from "lucide-react";
 import {ModeToggle} from "@/components/buttonTheme";
+import {SheetDriverLeft} from "@/components/sheet-driver-left"
 
 
 interface Props {
@@ -112,6 +113,7 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
         <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)}/>
 
         <ProfileButton onClickSignIn={() => setOpenAuthModal(true)}/>
+
 
         {/*{hasCart && <CartButton />}*/}
       </div>
