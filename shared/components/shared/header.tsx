@@ -14,7 +14,6 @@ import { AuthModal } from './modals';
 import {Button} from "@/shared/components";
 import {ArrowLeft} from "lucide-react";
 import {ModeToggle} from "@/components/buttonTheme";
-import {SheetDriverLeft} from "@/components/sheet-driver-left"
 
 
 interface Props {

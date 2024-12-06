@@ -13,14 +13,15 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu"
-import {Menu} from "lucide-react";
+import {Logs} from "lucide-react";
 
 
-export function MenuTop() {
+
+export function MenuTopRight() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Menu/>
+                <Logs />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
