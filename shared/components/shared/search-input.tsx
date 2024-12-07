@@ -64,16 +64,16 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
               'absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-list duration-200 invisible opacity-0 z-30',
               focused && 'visible opacity-100 top-12',
             )}>
-            {products.map((product) => (
-              <Link
-                onClick={onClickItem}
-                key={product.id}
-                className="flex items-center gap-3 w-full px-3 py-2 hover:bg-primary/10"
-                href={`/product/${product.id}`}>
-                <img className="rounded-sm h-8 w-8" src={product.imageUrl} alt={product.name} />
-                <span>{product.name}</span>
-              </Link>
-            ))}
+            {/*{products.map((product) => (*/}
+            {/*  <Link*/}
+            {/*    onClick={onClickItem}*/}
+            {/*    key={product.id}*/}
+            {/*    className="flex items-center gap-3 w-full px-3 py-2 hover:bg-primary/10"*/}
+            {/*    href={`/product/${product.id}`}>*/}
+            {/*    <img className="rounded-sm h-8 w-8" src={product.imageUrl} alt={product.name} />*/}
+            {/*    <span>{product.name}</span>*/}
+            {/*  </Link>*/}
+            {/*))}*/}
           </div>
         )}
       </div>
