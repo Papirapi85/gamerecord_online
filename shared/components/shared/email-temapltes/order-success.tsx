@@ -15,12 +15,12 @@ export const OrderSuccessTemplate: React.FC<Props> = ({ orderId, items }) => (
     <hr />
 
     <ul>
-      {items.map((item) => (
-        <li key={item.id}>
-          {item.productItem.product.name} | {item.productItem.price} ₽ x {item.quantity} шт. ={' '}
-          {item.productItem.price * item.quantity} ₽
-        </li>
-      ))}
+      {/*{items.map((item) => (*/}
+      {/*  <li key={item.id}>*/}
+      {/*    {item.productItem.product.name} | {item.productItem.price} ₽ x {item.quantity} шт. ={' '}*/}
+      {/*    {item.productItem.price * item.quantity} ₽*/}
+      {/*  </li>*/}
+      {/*))}*/}
     </ul>
   </div>
 );
