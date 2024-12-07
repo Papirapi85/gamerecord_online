@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { categories, _ingredients, products } from './constants';
+import { categories, _ingredients, products, productsItem, gameRecords } from './constants';
 import { prisma } from './prisma-client';
 import { hashSync } from 'bcrypt';
 
@@ -28,18 +28,25 @@ async function up() {
   await prisma.user.createMany({
     data: [
       {
-        fullName: 'User Test',
-        email: 'user@test.ru',
-        password: hashSync('111111', 10),
+        fullName: 'Pi',
+        email: 'umdom2@gmail.com',
+        password: hashSync('123123', 10),
+        verified: new Date(),
+        role: 'ADMIN',
+      },
+      {
+        fullName: 'Yatsyk',
+        email: 'umdom555@gmail.com',
+        password: hashSync('123123', 10),
         verified: new Date(),
         role: 'USER',
       },
       {
-        fullName: 'Admin Admin',
-        email: 'admin@test.ru',
-        password: hashSync('111111', 10),
+        fullName: '123',
+        email: '123@123.com',
+        password: hashSync('123123', 10),
         verified: new Date(),
-        role: 'ADMIN',
+        role: 'USER',
       },
     ],
   });
@@ -55,6 +62,14 @@ async function up() {
   await prisma.product.createMany({
     data: products,
   });
+
+  await prisma.productItem.createMany({
+    data: productsItem,
+  });
+
+  await prisma.gameRecords.createMany({
+    data: gameRecords,
+  })
 
   // const pizza1 = await prisma.product.create({
   //   data: {
@@ -92,8 +107,8 @@ async function up() {
   //   },
   // });
 
-  await prisma.productItem.createMany({
-    data: [
+  // await prisma.productItem.createMany({
+  //   data: [
       // // Пицца "Пепперони фреш"
       // generateProductItem({ productId: pizza1.id, pizzaType: 1, size: 20 }),
       // generateProductItem({ productId: pizza1.id, pizzaType: 2, size: 30 }),
@@ -113,25 +128,25 @@ async function up() {
       // generateProductItem({ productId: pizza3.id, pizzaType: 2, size: 40 }),
 
       // Остальные продукты
-      generateProductItem({ productId: 1 }),
-      generateProductItem({ productId: 2 }),
-      generateProductItem({ productId: 3 }),
-      generateProductItem({ productId: 4 }),
-      generateProductItem({ productId: 5 }),
-      generateProductItem({ productId: 6 }),
-      generateProductItem({ productId: 7 }),
-      generateProductItem({ productId: 8 }),
-      generateProductItem({ productId: 9 }),
-      generateProductItem({ productId: 10 }),
-      generateProductItem({ productId: 11 }),
-      generateProductItem({ productId: 12 }),
-      generateProductItem({ productId: 13 }),
-      generateProductItem({ productId: 14 }),
-      generateProductItem({ productId: 15 }),
-      generateProductItem({ productId: 16 }),
-      generateProductItem({ productId: 17 }),
-    ],
-  });
+      // generateProductItem({ productId: 1 }),
+      // generateProductItem({ productId: 2 }),
+      // generateProductItem({ productId: 3 }),
+      // generateProductItem({ productId: 4 }),
+      // generateProductItem({ productId: 5 }),
+      // generateProductItem({ productId: 6 }),
+      // generateProductItem({ productId: 7 }),
+      // generateProductItem({ productId: 8 }),
+      // generateProductItem({ productId: 9 }),
+      // generateProductItem({ productId: 10 }),
+      // generateProductItem({ productId: 11 }),
+      // generateProductItem({ productId: 12 }),
+      // generateProductItem({ productId: 13 }),
+      // generateProductItem({ productId: 14 }),
+      // generateProductItem({ productId: 15 }),
+      // generateProductItem({ productId: 16 }),
+      // generateProductItem({ productId: 17 }),
+  //   ],
+  // });
 
   await prisma.cart.createMany({
     data: [

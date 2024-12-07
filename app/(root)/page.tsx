@@ -1,19 +1,12 @@
-import {
-  Container,
-  TopBar,
-} from '@/shared/components/shared';
+import {Container, TopBar} from '@/shared/components/shared';
 
-
+import {GameRecords} from "@/components/gameRecords";
 
 export default async function Home() {
 
 
-
   return (
     <>
-      {/*<Container className="mt-10">*/}
-      {/*  <Title text="Все пиццы" size="lg" className="font-extrabold" />*/}
-      {/*</Container>*/}
 
       <TopBar />
 
@@ -22,7 +15,11 @@ export default async function Home() {
 
 
       <Container className="mt-10 pb-14">
-        <div className="flex gap-[80px]">
+
+      {/*<CategoryMap/>*/}
+          <GameRecords/>
+
+        {/*<div className="flex gap-[80px]">*/}
           {/* Фильтрация */}
           {/*<div className="w-[250px]">*/}
           {/*  <Suspense>*/}
@@ -48,7 +45,7 @@ export default async function Home() {
           {/*    )}*/}
           {/*  </div>*/}
           {/*</div>*/}
-        </div>
+        {/*</div>*/}
       </Container>
     </>
   );

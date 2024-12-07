@@ -24,6 +24,7 @@ model User {
 
   cart             Cart?
   orders           Order[]
+  Gamerecords      GameRecords[]
   verificationCode VerificationCode?
 
   createdAt DateTime @default(now())
@@ -31,9 +32,10 @@ model User {
 }
 
 model Category {
-  id       Int       @id @default(autoincrement())
-  name     String    @unique
-  products Product[]
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  products    Product[]
+  gameRecords GameRecords[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -43,10 +45,11 @@ model Product {
   id Int @id @default(autoincrement())
 
   name     String
-  imageUrl String
+  imageUrl String?
 
   ingredients Ingredient[]
   items       ProductItem[]
+  gameRecords GameRecords[]
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
@@ -58,14 +61,42 @@ model Product {
 model ProductItem {
   id Int @id @default(autoincrement())
 
-  price     Int
+  price     Int?
   size      Int?
   pizzaType Int?
 
-  cartItems CartItem[]
+  cartItems   CartItem[]
+  gameRecords GameRecords[]
+
+  description String
+  product     Product @relation(fields: [productId], references: [id])
+  productId   Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GameRecords {
+  id Int @id @default(autoincrement())
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
 
   product   Product @relation(fields: [productId], references: [id])
   productId Int
+
+  productItem   ProductItem @relation(fields: [productItemId], references: [id])
+  productItemId Int
+
+  timestate String
+  linkvideo String
+  img       String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Ingredient {
