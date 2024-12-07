@@ -38,24 +38,26 @@ export const ProductForm: React.FC<Props> = ({ product, onSubmit: _onSubmit }) =
 
   if (isPizzaForm) {
     return (
-      <ChoosePizzaForm
-        imageUrl={product.imageUrl}
-        name={product.name}
-        ingredients={product.ingredients}
-        items={product.items}
-        onSubmit={onSubmit}
-        loading={loading}
-      />
+        <div></div>
+      // <ChoosePizzaForm
+      //   imageUrl={product.imageUrl}
+      //   name={product.name}
+      //   ingredients={product.ingredients}
+      //   items={product.items}
+      //   onSubmit={onSubmit}
+      //   loading={loading}
+      // />
     );
   }
 
   return (
-    <ChooseProductForm
-      imageUrl={product.imageUrl}
-      name={product.name}
-      onSubmit={onSubmit}
-      price={firstItem.price}
-      loading={loading}
-    />
+      <div></div>
+  // <ChooseProductForm
+  //     imageUrl={product.imageUrl}
+  //     name={product.name}
+  //     onSubmit={onSubmit}
+  //     price={firstItem.price}
+  //     loading={loading}
+  //   />
   );
 };
