@@ -1,7 +1,7 @@
 'use client';
 
 import { Api } from '@/shared/services/api-client';
-import { ICategory } from '@/shared/services/categories';
+import { IGameRecords } from '@/shared/services/game-records';
 import { cn } from '@/shared/lib/utils';
 import React from 'react';
 import {Loader} from "lucide-react";
@@ -13,24 +13,24 @@ interface Props {
 
 export const GameRecords: React.FC<Props> = ({ className }) => {
 
-    const [categories, setCategories] = React.useState<ICategory []>([]);
-    const [open, setOpen] = React.useState(false);
+    const [GameRecords, setGameRecords] = React.useState<IGameRecords []>([]);
+    const [loading, setLoading] = React.useState(false);
 
     React.useEffect(() => {
-        async function fetchStories() {
-            const data = await Api.categories.getAll();
-            setCategories(data);
+        async function fetchGameRecords() {
+            const data = await Api.gameRecords.getAll();
+            setGameRecords(data);
         }
-        fetchStories().then(r => setOpen(true));
+        fetchGameRecords().then(r => setLoading(true));
     }, []);
 
     return (
         <div>
-            {open ?
-                <div className={cn('gap-1 bg-secondary p-1 rounded-2xl', className)}>
-                    {categories.map((category) => (
-                        <div key={category.id}>
-                            {category.name}
+            {loading ?
+                <div className={cn('gap-1 bg-secondary p-1 rounded-2xl')}>
+                    {GameRecords.map((records) => (
+                        <div key={records.id}>
+                            {records.timestate}
                         </div>
                     ))}
                 </div>
