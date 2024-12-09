@@ -21,7 +21,7 @@ export const TopBar: React.FC<Props> = ({className}) => {
 
                     <div className={cn('inline-flex gap-1 p-1 rounded-2xl h-12', className)}>
                         <div className={cn('cursor-pointer absolute left-1 mt-2', className)}>
-                            {/*<SheetDriverLeft/>*/}
+                            <SheetDriverLeft/>
                         </div>
                         <div className={cn('cursor-pointer absolute mt-2 left-1/4 ', className)}>
                             <MenuTopLeft/>
@@ -30,7 +30,7 @@ export const TopBar: React.FC<Props> = ({className}) => {
                             <MenuTopRight/>
                         </div>
                         <div className={cn('cursor-pointer absolute right-1 mt-2', className)}>
-                            {/*<SheetDriverRight/>*/}
+                            <SheetDriverRight/>
                         </div>
                     </div>
                 </Container>
