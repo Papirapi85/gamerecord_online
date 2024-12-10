@@ -61,7 +61,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
         {products.length > 0 && (
           <div
             className={cn(
-              'absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-list duration-200 invisible opacity-0 z-30',
+              'absolute w-full bg-secondary rounded-xl py-2 top-14 shadow-md transition-list duration-200 invisible opacity-0 z-30',
               focused && 'visible opacity-100 top-12',
             )}>
             {/*{products.map((product) => (*/}

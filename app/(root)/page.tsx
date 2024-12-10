@@ -1,6 +1,6 @@
 import {Container, TopBar} from '@/shared/components/shared';
 
-import {GameRecords} from "@/components/gameRecords";
+import GameRecords_SERVER from "@/components/gameRecords_SERVER";
 
 export default async function Home() {
 
@@ -17,8 +17,8 @@ export default async function Home() {
       <Container className="mt-10 pb-14">
 
       {/*<CategoryMap/>*/}
-          <GameRecords/>
-
+      {/*    <GameRecords/>*/}
+            <GameRecords_SERVER/>
         {/*<div className="flex gap-[80px]">*/}
           {/* Фильтрация */}
           {/*<div className="w-[250px]">*/}

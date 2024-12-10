@@ -20,7 +20,7 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
   return (
       <div
         className={cn(
-          'p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden',
+          'p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-secondary overflow-hidden',
           className,
         )}>
         <ProductForm product={product} onSubmit={() => router.back()} />

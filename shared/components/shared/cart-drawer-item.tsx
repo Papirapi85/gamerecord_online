@@ -26,7 +26,7 @@ export const CartDrawerItem: React.FC<Props> = ({
   return (
     <div
       className={cn(
-        'flex bg-white p-5 gap-6',
+        'flex bg-secondary p-5 gap-6',
         {
           'opacity-50 pointer-events-none': disabled,
         },
