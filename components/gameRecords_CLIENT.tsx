@@ -2,33 +2,62 @@
 
 import React from 'react';
 import {cn} from "@/shared/lib/utils";
+import {Suspense} from 'react';
 
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/shared/components/ui/table"
 
 interface Props {
-    game_records: any[];
+    gameRecords: any[];
 }
 
-export const GameRecord_CLIENT: React.FC<Props> = ({ game_records }) => {
+export const GameRecord_CLIENT: React.FC<Props> = ({gameRecords}) => {
+
 
     return (
-        <div className={cn('gap-1 bg-secondary p-1 rounded-2xl')}>
-            {
-                game_records.map((records, index) => (
-                <div key={index} className={cn('gap-1 bg-secondary p-1 rounded-2xl')}>
-                    {records.category.name}{' | '}
-                    {records.user.fullName}{' | '}
-                    {records.timestate}{' | '}
-                    {records.productItem.description}{' | '}
-                    {records.product.name}{' '}
-                </div>
-            ))}
+        <div>
+            <Table>
+                <TableCaption>Gamerecord.online</TableCaption>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="w-[100px]">Player</TableHead>
+                        <TableHead>Category</TableHead>
+                        <TableHead>Game</TableHead>
+                        <TableHead>Class</TableHead>
+                        <TableHead>Time</TableHead>
+                        <TableHead>Image</TableHead>
+                        <TableHead className="text-right">Link</TableHead>
+                    </TableRow>
+                </TableHeader>
+
+
+                <Suspense>
+                    {
+                        gameRecords.map((records, index) => (
+
+                            <TableBody key={index}>
+                                <TableRow>
+                                    <TableCell className="font-medium">{records.user.fullName}</TableCell>
+                                    <TableCell>{records.category.name}</TableCell>
+                                    <TableCell>{records.product.name}</TableCell>
+                                    <TableCell>{records.productItem.description}</TableCell>
+                                    <TableCell>{records.timestate}</TableCell>
+                                    <TableCell>Image</TableCell>
+                                    <TableCell className="text-right">Video</TableCell>
+                                </TableRow>
+                            </TableBody>
+
+                        ))}
+                </Suspense>
+            </Table>
         </div>
-        // <GameRecord_MAP
-        //     user={game_records.user}
-        //     product={game_records.product}
-        //     productItem={game_records.product}
-        //     category={game_records.category}
-        // />
     );
 };
 

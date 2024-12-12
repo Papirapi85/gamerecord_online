@@ -2,6 +2,8 @@ import {Container, TopBar} from '@/shared/components/shared';
 
 import GameRecords_SERVER from "@/components/gameRecords_SERVER";
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
 
 
@@ -11,7 +13,6 @@ export default async function Home() {
       <TopBar />
 
       {/*<Stories />*/}
-
 
 
       <Container className="mt-10 pb-14">
