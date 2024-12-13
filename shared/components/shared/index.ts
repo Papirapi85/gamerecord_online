@@ -25,8 +25,10 @@ export { ErrorText } from './error-text';
 export { RequiredSymbol } from './required-symbol';
 export { ClearButton } from './clear-button';
 export { ProfileButton } from './profile-button';
+export { AdminButton } from './admin-button';
 export { InfoBlock } from './info-block';
 export { ProfileForm } from './profile-form';
+export { AdminForm } from './admin-form';
 export { Stories } from './stories';
 export { LeftBlockLinkCategory } from './left-block-link-category'
 export * from './email-temapltes';

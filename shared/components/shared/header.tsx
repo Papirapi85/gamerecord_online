@@ -11,7 +11,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { ProfileButton } from './profile-button';
 import { AuthModal } from './modals';
-import {Button} from "@/shared/components";
+import {AdminButton, Button} from "@/shared/components";
 import {ArrowLeft} from "lucide-react";
 import {ModeToggle} from "@/components/buttonTheme";
 
@@ -112,6 +112,7 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
         <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)}/>
 
         <ProfileButton onClickSignIn={() => setOpenAuthModal(true)}/>
+        <AdminButton />
 
 
         {/*{hasCart && <CartButton />}*/}
