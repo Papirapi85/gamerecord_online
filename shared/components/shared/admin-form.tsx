@@ -1,84 +1,88 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { TFormRegisterValues, formRegisterSchema } from './modals/auth-modal/forms/schemas';
-import { User } from '@prisma/client';
+import {zodResolver} from '@hookform/resolvers/zod';
+import React, {useEffect} from 'react';
+import {FormProvider, useForm} from 'react-hook-form';
+import {TFormRegisterValues, formRegisterSchema} from './modals/auth-modal/forms/schemas';
+import {Category, User} from '@prisma/client';
 import toast from 'react-hot-toast';
-import { signOut } from 'next-auth/react';
-import { Container } from './container';
-import { Title } from './title';
-import { FormInput } from './form';
-import { Button } from '../ui';
-import { updateUserInfo } from '@/app/actions';
+import {signOut} from 'next-auth/react';
+import {Container} from './container';
+import {Title} from './title';
+import {FormInput} from './form';
+import {Button, Input} from '../ui';
+import {updateUserInfo} from '@/app/actions';
+
 
 interface Props {
-  data: User;
+    data: User;
+    category: Category[];
 }
 
-export const AdminForm: React.FC<Props> = ({ data }) => {
-  const form = useForm({
-    resolver: zodResolver(formRegisterSchema),
-    defaultValues: {
-      fullName: data.fullName,
-      email: data.email,
-      password: '',
-      confirmPassword: '',
-    },
-  });
-
-  const onSubmit = async (data: TFormRegisterValues) => {
-    try {
-      await updateUserInfo({
-        email: data.email,
-        fullName: data.fullName,
-        password: data.password,
-      });
-
-      toast.error('Данные обновлены 📝', {
-        icon: '✅',
-      });
-    } catch (error) {
-      return toast.error('Ошибка при обновлении данных', {
-        icon: '❌',
-      });
-    }
-  };
-
-  const onClickSignOut = () => {
-    signOut({
-      callbackUrl: '/',
+export const AdminForm: React.FC<Props> = ({data, category}) => {
+    const form = useForm({
+        defaultValues: {
+            role: data.role,
+            category: category,
+        },
     });
-  };
+    const [categories, setCategories] = React.useState<Category[]>(category);
 
-  return (
-      <Container className="my-10">
-        {/*<Title text={`Личные данные | #${data.id}`} size="md" className="font-bold" />*/}
-        <Title text={`Личные данные`} size="md" className="font-bold" />
 
-        <FormProvider {...form}>
-          <form className="flex flex-col gap-5 w-96 mt-10" onSubmit={form.handleSubmit(onSubmit)}>
-            <FormInput name="email" label="E-Mail" required />
-            <FormInput name="fullName" label="Полное имя" required />
+    const onSubmit = async (data: TFormRegisterValues) => {
+        try {
 
-            <FormInput type="password" name="password" label="Новый пароль" required />
-            <FormInput type="password" name="confirmPassword" label="Повторите пароль" required />
+            // await updateUserInfo({
+            //     name: data.email,
+            // });
+            //
+            //
+            // //updateCategory
+            //
+            // toast.error('Данные обновлены 📝', {
+            //     icon: '✅',
+            // });
 
-            <Button disabled={form.formState.isSubmitting} className="text-base mt-10" type="submit">
-              Сохранить
-            </Button>
+        } catch (error) {
+            return toast.error('Ошибка при обновлении данных', {
+                icon: '❌',
+            });
+        }
+    };
 
-            <Button
-                onClick={onClickSignOut}
-                variant="secondary"
-                disabled={form.formState.isSubmitting}
-                className="text-base"
-                type="button">
-              Выйти
-            </Button>
-          </form>
-        </FormProvider>
-      </Container>
-  );
+    // const onClickSignOut = () => {
+    //   signOut({
+    //     callbackUrl: '/',
+    //   });
+    // };
+
+    const eventHandler = (id: any, value: any) => {
+        setCategories(
+            categories.map((item) =>
+                item.id === id ? {...item, name: value} : item
+            )
+        )
+    };
+
+    return (
+        <Container className="my-10">
+
+            <Title text={`#${data.role}`} size="md" className="font-bold"/>
+            <Title text={`Category`} size="md" className="font-bold"/>
+
+            {category.map((item, index) => (
+                <div key={index} className="flex w-full max-w-sm items-center space-x-2 mb-1">
+                    <Input type='text'
+                           defaultValue={item.name}
+                           onChange={e => eventHandler(item.id, e.target.value)
+                    }/>
+                    <Button type="submit"
+                            disabled={item.name === categories[index].name}
+                            // onClick={() => eventHandler(item.id)}
+                    >Update</Button>
+                </div>
+            ))}
+
+        </Container>
+    );
 };
