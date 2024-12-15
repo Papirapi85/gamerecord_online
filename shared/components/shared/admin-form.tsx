@@ -11,7 +11,9 @@ import {Container} from './container';
 import {Title} from './title';
 import {FormInput} from './form';
 import {Button, Input} from '../ui';
-import {updateCategory, updateCategoryCreate, updateCategoryDelete} from '@/app/actions';
+import {categoryUpdate, categoryCreate, categoryDelete} from '@/app/actions';
+import {redirect} from "next/navigation";
+import {revalidatePath} from "next/cache";
 
 
 interface Props {
@@ -38,26 +40,15 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
         )
     };
 
-    const eventSubmitUpdate = async (id: any, name: any) => {
-        try {
-            await updateCategory({
-                id: id,
-                name: name,
-            });
-
-            toast.error('Данные обновлены 📝', {
-                icon: '✅',
-            });
-        } catch (error) {
-            return toast.error('Ошибка при обновлении данных', {
-                icon: '❌',
-            });
-        }
-    }
-
     const eventSubmitCreate = async () => {
         try {
-            await updateCategoryCreate({
+            if(categoryAdd === '') {
+                return toast.error('Ошибка при создании данных, пустое поле', {
+                    icon: '❌',
+                });
+            }
+
+            await categoryCreate({
                 name: categoryAdd,
             });
 
@@ -65,18 +56,17 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
                 icon: '✅',
             });
 
-            setCategoryAdd('')
-
         } catch (error) {
             return toast.error('Ошибка при создании данных', {
                 icon: '❌',
             });
         }
+        redirect(`/admin`)
     }
 
     const eventSubmitDelete = async (id: any) => {
         try {
-            await updateCategoryDelete({
+            await categoryDelete({
                 id: id,
             });
 
@@ -89,6 +79,33 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
                 icon: '❌',
             });
         }
+        redirect(`/admin`)
+    }
+
+    const eventSubmitUpdate = async (id: any, name: any) => {
+        try {
+
+            if(name === '') {
+                return toast.error('Ошибка при создании данных, пустое поле', {
+                    icon: '❌',
+                });
+            }
+
+            await categoryUpdate({
+                id: id,
+                name: name,
+            });
+
+            toast.error('Данные обновлены 📝', {
+                icon: '✅',
+            });
+
+        } catch (error) {
+            return toast.error('Ошибка при обновлении данных', {
+                icon: '❌',
+            });
+        }
+        redirect(`/admin`)
     }
 
     return (
@@ -105,7 +122,7 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
                     }/>
                     <Button
                             type="submit"
-                            disabled={item.name === categories[index].name}
+                            // disabled={item.name === categories[index].name}
                             onClick={() => eventSubmitUpdate(item.id, categories[index].name)}
                     >Up</Button>
                     <Button

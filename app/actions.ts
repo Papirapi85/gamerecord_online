@@ -221,7 +221,6 @@ export async function createBlopAction(data: { newBlob: PutBlobResult }) {
     }
 
     revalidatePath('/')
-    // redirect(`/blob/list/${post.slug}`)
     redirect(`/blop/list-data`)
 }
 
@@ -242,7 +241,7 @@ export async function deleteBlopAction(data: { id: Number }) {
 }
 
 
-export async function updateCategory(data: any) {
+export async function categoryUpdate(data: any) {
     try {
         const findCategory = await prisma.category.findFirst({
             where: {
@@ -268,7 +267,7 @@ export async function updateCategory(data: any) {
     }
 }
 
-export async function updateCategoryCreate(data: any) {
+export async function categoryCreate(data: any) {
     let category;
     try {
         category = await prisma.category.create({
@@ -285,12 +284,12 @@ export async function updateCategoryCreate(data: any) {
         console.log('Error [CREATE_CATEGORY]', err);
         throw err;
     }
+
 }
 
-export async function updateCategoryDelete(data: any) {
+export async function categoryDelete(data: any) {
 
     let categoryDelete;
-    console.log("11111111111111 "+ data.id)
     try {
         categoryDelete = await prisma.category.findFirst({
             where: {
