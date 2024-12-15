@@ -11,7 +11,7 @@ import {Container} from './container';
 import {Title} from './title';
 import {FormInput} from './form';
 import {Button, Input} from '../ui';
-import {updateUserInfo} from '@/app/actions';
+import {updateCategory, updateCategoryCreate, updateCategoryDelete} from '@/app/actions';
 
 
 interface Props {
@@ -27,34 +27,8 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
         },
     });
     const [categories, setCategories] = React.useState<Category[]>(category);
+    const [categoryAdd, setCategoryAdd] = React.useState('');
 
-
-    const onSubmit = async (data: TFormRegisterValues) => {
-        try {
-
-            // await updateUserInfo({
-            //     name: data.email,
-            // });
-            //
-            //
-            // //updateCategory
-            //
-            // toast.error('Данные обновлены 📝', {
-            //     icon: '✅',
-            // });
-
-        } catch (error) {
-            return toast.error('Ошибка при обновлении данных', {
-                icon: '❌',
-            });
-        }
-    };
-
-    // const onClickSignOut = () => {
-    //   signOut({
-    //     callbackUrl: '/',
-    //   });
-    // };
 
     const eventHandler = (id: any, value: any) => {
         setCategories(
@@ -64,11 +38,64 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
         )
     };
 
+    const eventSubmitUpdate = async (id: any, name: any) => {
+        try {
+            await updateCategory({
+                id: id,
+                name: name,
+            });
+
+            toast.error('Данные обновлены 📝', {
+                icon: '✅',
+            });
+        } catch (error) {
+            return toast.error('Ошибка при обновлении данных', {
+                icon: '❌',
+            });
+        }
+    }
+
+    const eventSubmitCreate = async () => {
+        try {
+            await updateCategoryCreate({
+                name: categoryAdd,
+            });
+
+            toast.error('Данные созданы 📝', {
+                icon: '✅',
+            });
+
+            setCategoryAdd('')
+
+        } catch (error) {
+            return toast.error('Ошибка при создании данных', {
+                icon: '❌',
+            });
+        }
+    }
+
+    const eventSubmitDelete = async (id: any) => {
+        try {
+            await updateCategoryDelete({
+                id: id,
+            });
+
+            toast.error('Данные удалены📝', {
+                icon: '✅',
+            });
+
+        } catch (error) {
+            return toast.error('Ошибка при удалении данных', {
+                icon: '❌',
+            });
+        }
+    }
+
     return (
         <Container className="my-10">
 
             <Title text={`#${data.role}`} size="md" className="font-bold"/>
-            <Title text={`Category`} size="md" className="font-bold"/>
+            <Title text={`Category Edit`} size="md" className="font-bold"/>
 
             {category.map((item, index) => (
                 <div key={index} className="flex w-full max-w-sm items-center space-x-2 mb-1">
@@ -76,13 +103,28 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
                            defaultValue={item.name}
                            onChange={e => eventHandler(item.id, e.target.value)
                     }/>
-                    <Button type="submit"
+                    <Button
+                            type="submit"
                             disabled={item.name === categories[index].name}
-                            // onClick={() => eventHandler(item.id)}
-                    >Update</Button>
+                            onClick={() => eventSubmitUpdate(item.id, categories[index].name)}
+                    >Up</Button>
+                    <Button
+                        type="submit"
+                        onClick={() => eventSubmitDelete(item.id)}
+                    >Del</Button>
                 </div>
             ))}
 
+            <Title text={`Category Add`} size="md" className="font-bold"/>
+            <div className="flex w-full max-w-sm items-center space-x-2 mb-1">
+                <Input type='text'
+                       onChange={e => setCategoryAdd(e.target.value)
+                }/>
+                <Button
+                    type="submit"
+                    onClick={eventSubmitCreate}
+                >Add</Button>
+            </div>
         </Container>
     );
 };

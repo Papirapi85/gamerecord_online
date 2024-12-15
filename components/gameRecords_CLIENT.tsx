@@ -48,7 +48,7 @@ export const GameRecord_CLIENT: React.FC<Props> = ({gameRecords}) => {
                                     <TableCell>{records.category.name}</TableCell>
                                     <TableCell>{records.product.name}</TableCell>
                                     <TableCell>{records.productItem.description}</TableCell>
-                                    <TableCell>{records.timestate}</TableCell>
+                                    <TableCell>{records.timestate.substring(3)}</TableCell>
                                     <TableCell>Image</TableCell>
                                     <TableCell className="text-right">Video</TableCell>
                                 </TableRow>
