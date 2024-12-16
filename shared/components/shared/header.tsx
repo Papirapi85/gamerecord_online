@@ -14,6 +14,7 @@ import { AuthModal } from './modals';
 import {AdminButton, Button} from "@/shared/components";
 import {ArrowLeft} from "lucide-react";
 import {ModeToggle} from "@/components/buttonTheme";
+import {DropmenuAdmin} from "@/components/dropmenu-admin";
 
 
 interface Props {
@@ -78,11 +79,11 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
           {/*  </Button>*/}
           {/*</Link>*/}
 
-            {/*<Link href="/blop/up">*/}
-            {/*  <Button variant="outline" className="gap-2">*/}
-            {/*    blop up*/}
-            {/*  </Button>*/}
-            {/*</Link>*/}
+          {/*<Link href="/blop/up">*/}
+          {/*  <Button variant="outline" className="gap-2">*/}
+          {/*    blop up*/}
+          {/*  </Button>*/}
+          {/*</Link>*/}
 
           {/*<Link href="/blop/list">*/}
           {/*  <Button variant="outline" className="gap-2">*/}
@@ -109,16 +110,19 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
           {/*  </Button>*/}
           {/*</a>*/}
 
-        <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)}/>
+          <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)}/>
 
-        <ProfileButton onClickSignIn={() => setOpenAuthModal(true)}/>
-        <AdminButton />
+          <ProfileButton onClickSignIn={() => setOpenAuthModal(true)}/>
+          <AdminButton/>
+
+          <DropmenuAdmin/>
 
 
-        {/*{hasCart && <CartButton />}*/}
-      </div>
-    </Container>
-</header>
-)
-  ;
+
+          {/*{hasCart && <CartButton />}*/}
+        </div>
+      </Container>
+    </header>
+  )
+      ;
 };

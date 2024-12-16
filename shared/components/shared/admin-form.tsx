@@ -72,7 +72,7 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
                 icon: '❌',
             });
         }
-        redirect(`/admin`)
+        redirect(`/admin/category`)
     }
 
     const eventSubmitDelete = async (id: any) => {
@@ -92,7 +92,7 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
                 icon: '❌',
             });
         }
-        redirect(`/admin`)
+        redirect(`/admin/category`)
     }
 
     const eventSubmitUpdate = async (categories2Index: any) => {
@@ -121,7 +121,7 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
             });
         }
 
-        redirect(`/admin`)
+        redirect(`/admin/category`)
     }
 
 

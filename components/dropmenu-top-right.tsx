@@ -17,7 +17,7 @@ import {Logs} from "lucide-react";
 
 
 
-export function MenuTopRight() {
+export function DropmenuTopRight() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

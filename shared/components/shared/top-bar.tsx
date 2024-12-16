@@ -2,8 +2,8 @@ import {cn} from '@/shared/lib/utils';
 import React from 'react';
 import {Container} from './container';
 import {SheetDriverLeft} from "@/components/sheet-driver-left";
-import {MenuTopLeft} from "@/components/menu-top-left";
-import {MenuTopRight} from "@/components/menu-top-right";
+import {DropmenuTopLeft} from "@/components/dropmenu-top-left";
+import {DropmenuTopRight} from "@/components/dropmenu-top-right";
 import {SheetDriverRight} from "@/components/sheet-driver-right";
 
 
@@ -24,10 +24,10 @@ export const TopBar: React.FC<Props> = ({className}) => {
                             <SheetDriverLeft/>
                         </div>
                         <div className={cn('cursor-pointer absolute mt-2 left-1/4 ', className)}>
-                            <MenuTopLeft/>
+                            <DropmenuTopLeft/>
                         </div>
                         <div className={cn('cursor-pointer absolute mt-2 right-1/4 ', className)}>
-                            <MenuTopRight/>
+                            <DropmenuTopRight/>
                         </div>
                         <div className={cn('cursor-pointer absolute right-1 mt-2', className)}>
                             <SheetDriverRight/>

@@ -5,7 +5,7 @@ import {useCategoryStore} from '@/shared/store/category';
 import {Category} from '@prisma/client';
 import React from 'react';
 import {SheetDriverLeft} from "@/components/sheet-driver-left";
-import {MenuTopLeft} from "@/components/menu-top-left";
+import {DropmenuTopLeft} from "@/components/dropmenu-top-left";
 import {SheetDriverRight} from "@/components/sheet-driver-right";
 
 
@@ -34,10 +34,10 @@ export const Categories: React.FC<Props> = ({items, className}) => {
             {/*    <SheetDriverLeft/>*/}
             {/*</div>*/}
             {/*<div className={cn('cursor-pointer absolute mt-2 left-1 ', className)}>*/}
-            {/*    <MenuTopLeft/>*/}
+            {/*    <DropmenuTopLeft/>*/}
             {/*</div>*/}
             {/*<div className={cn('cursor-pointer absolute mt-2 left-1 ', className)}>*/}
-            {/*    <MenuTopLeft/>*/}
+            {/*    <DropmenuTopLeft/>*/}
             {/*</div>*/}
             {/*<div className={cn('cursor-pointer absolute right-1 mt-2', className)}>*/}
             {/*    <SheetDriverRight/>*/}

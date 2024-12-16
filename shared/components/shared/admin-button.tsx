@@ -14,7 +14,7 @@ export const AdminButton: React.FC<Props> = ({ className }) => {
   return (
     <div className={className}>
       {session && session?.user.role === 'ADMIN' &&
-        <Link href="/admin">
+        <Link href="/admin/category">
           <Button variant="secondary" className="flex items-center gap-2">
             <CircleUser size={18} />
             Admin
