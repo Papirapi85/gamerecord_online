@@ -21,4 +21,6 @@ export default async function AdminPage() {
     return redirect('/not-auth');
   }
 
+
+
 }

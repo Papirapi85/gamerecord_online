@@ -13,7 +13,7 @@ import {FormInput} from './form';
 import {Button, Input} from '../ui';
 import {categoryUpdate, categoryCreate, categoryDelete} from '@/app/actions';
 import {redirect} from "next/navigation";
-import {revalidatePath} from "next/cache";
+
 
 
 interface Props {
@@ -22,20 +22,31 @@ interface Props {
 }
 
 export const AdminForm: React.FC<Props> = ({data, category}) => {
-    const form = useForm({
-        defaultValues: {
-            role: data.role,
-            category: category,
-        },
-    });
+
+
+    // const form = useForm({
+    //     defaultValues: {
+    //         role: data.role,
+    //         category: category,
+    //     },
+    // });
     const [categories, setCategories] = React.useState<Category[]>(category);
+    const [categories2, setCategories2] = React.useState<Category[]>(category);
+
     const [categoryAdd, setCategoryAdd] = React.useState('');
 
+    useEffect(() => {
+        setCategoryAdd('');
+        setCategories(category);
+        setCategories2(category);
+    }, [category]);
 
-    const eventHandler = (id: any, value: any) => {
-        setCategories(
+
+
+    const eventHandler = (categoryIndex: any, value: any) => {
+        setCategories2(
             categories.map((item) =>
-                item.id === id ? {...item, name: value} : item
+                item.id === categoryIndex.id ? {...item, name: value} : item
             )
         )
     };
@@ -70,6 +81,8 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
                 id: id,
             });
 
+            //setCategories(categories2);
+
             toast.error('Данные удалены📝', {
                 icon: '✅',
             });
@@ -82,19 +95,21 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
         redirect(`/admin`)
     }
 
-    const eventSubmitUpdate = async (id: any, name: any) => {
+    const eventSubmitUpdate = async (categories2Index: any) => {
         try {
 
-            if(name === '') {
+            if(categories2Index.name === '') {
                 return toast.error('Ошибка при создании данных, пустое поле', {
                     icon: '❌',
                 });
             }
 
             await categoryUpdate({
-                id: id,
-                name: name,
+                id: categories2Index.id,
+                name: categories2Index.name,
             });
+
+            //setCategories(categories2);
 
             toast.error('Данные обновлены 📝', {
                 icon: '✅',
@@ -105,8 +120,12 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
                 icon: '❌',
             });
         }
+
         redirect(`/admin`)
     }
+
+
+
 
     return (
         <Container className="my-10">
@@ -114,16 +133,17 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
             <Title text={`#${data.role}`} size="md" className="font-bold"/>
             <Title text={`Category Edit`} size="md" className="font-bold"/>
 
-            {category.map((item, index) => (
-                <div key={index} className="flex w-full max-w-sm items-center space-x-2 mb-1">
+            {categories.map((item, index) => (
+                <div key={item.id} className="flex w-full max-w-sm items-center space-x-2 mb-1">
+                    <p>{item.id}</p>
                     <Input type='text'
                            defaultValue={item.name}
-                           onChange={e => eventHandler(item.id, e.target.value)
+                           onChange={e => eventHandler(categories[index], e.target.value)
                     }/>
                     <Button
                             type="submit"
-                            // disabled={item.name === categories[index].name}
-                            onClick={() => eventSubmitUpdate(item.id, categories[index].name)}
+                            disabled={categories[index].name === categories2[index].name}
+                            onClick={() => eventSubmitUpdate(categories2[index])}
                     >Up</Button>
                     <Button
                         type="submit"
@@ -135,7 +155,10 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
             <Title text={`Category Add`} size="md" className="font-bold"/>
             <div className="flex w-full max-w-sm items-center space-x-2 mb-1">
                 <Input type='text'
-                       onChange={e => setCategoryAdd(e.target.value)
+                       value={categoryAdd}
+                       onChange={e => {
+                           setCategoryAdd(e.target.value)
+                       }
                 }/>
                 <Button
                     type="submit"

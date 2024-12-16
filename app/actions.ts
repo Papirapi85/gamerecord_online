@@ -253,6 +253,10 @@ export async function categoryUpdate(data: any) {
             throw new Error('Пользователь не найден');
         }
 
+        if (findCategory.name === data.name) {
+            throw new Error('Данные не обновлены, они одинаковые.');
+        }
+
         await prisma.category.update({
             where: {
                 id: Number(data.id),
@@ -269,7 +273,18 @@ export async function categoryUpdate(data: any) {
 
 export async function categoryCreate(data: any) {
     let category;
+    let categoryNameFind;
     try {
+       categoryNameFind = await prisma.category.findFirst({
+            where: {
+                name: data.name,
+            }
+        })
+        console.log(categoryNameFind);
+        if (categoryNameFind) {
+            throw new Error('Данная категория уже существует');
+        }
+
         category = await prisma.category.create({
             data: {
                 name: data.name,
@@ -284,7 +299,6 @@ export async function categoryCreate(data: any) {
         console.log('Error [CREATE_CATEGORY]', err);
         throw err;
     }
-
 }
 
 export async function categoryDelete(data: any) {
