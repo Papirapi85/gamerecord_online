@@ -28,7 +28,9 @@ export { ProfileButton } from './profile-button';
 export { AdminButton } from './admin-button';
 export { InfoBlock } from './info-block';
 export { ProfileForm } from './profile-form';
-export { AdminForm } from './admin-form';
+export { AdminCategory } from './admin-category';
+export { AdminProduct } from './admin-product';
+export { AdminProductItem } from './admin-product-item';
 export { Stories } from './stories';
 export { LeftBlockLinkCategory } from './left-block-link-category'
 export * from './email-temapltes';

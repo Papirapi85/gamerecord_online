@@ -21,7 +21,7 @@ interface Props {
     category: Category[];
 }
 
-export const AdminForm: React.FC<Props> = ({data, category}) => {
+export const AdminCategory: React.FC<Props> = ({data, category}) => {
 
 
     // const form = useForm({
@@ -128,9 +128,9 @@ export const AdminForm: React.FC<Props> = ({data, category}) => {
 
 
     return (
-        <Container className="my-10">
+        <Container className="my-4">
 
-            <Title text={`#${data.role}`} size="md" className="font-bold"/>
+            {/*<Title text={`#${data.role}`} size="md" className="font-bold"/>*/}
             <Title text={`Category Edit`} size="md" className="font-bold"/>
 
             {categories.map((item, index) => (

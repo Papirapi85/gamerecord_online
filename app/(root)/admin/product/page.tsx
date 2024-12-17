@@ -1,6 +1,6 @@
 'use server';
 import { prisma } from '@/prisma/prisma-client';
-import { AdminForm } from '@/shared/components';
+import { AdminProduct } from '@/shared/components';
 import { getUserSession } from '@/shared/lib/get-user-session';
 import { redirect } from 'next/navigation';
 
@@ -14,13 +14,11 @@ export default async function AdminPage() {
 
   const user = await prisma.user.findFirst({ where: { id: Number(session?.id) } });
   const category = await prisma.category.findMany();
+  const product = await prisma.product.findMany();
 
   if (user && user.role === 'ADMIN') {
-    return <AdminForm data={user} category={category} />;
+    return <AdminProduct data={user} category={category} product={product} />;
   }else{
     return redirect('/not-auth');
   }
-
-
-
 }
