@@ -162,6 +162,7 @@ export const AdminCategory: React.FC<Props> = ({data, category}) => {
                 }/>
                 <Button
                     type="submit"
+                    disabled={categoryAdd === ''}
                     onClick={eventSubmitCreate}
                 >Add</Button>
             </div>

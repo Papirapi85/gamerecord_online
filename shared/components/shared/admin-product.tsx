@@ -32,8 +32,8 @@ export const AdminProduct: React.FC<Props> = ({data, category, product}) => {
 
     const [categoryNameState, setCategoryNameState] = React.useState('');
     const [productState, setProductState] = React.useState<Product[]>(product);
-    const [productStateFind, setProductFindState] = React.useState<Product[]>([]);
-    const [productStateFind2, setProductFindState2] = React.useState<Product[]>([]);
+    const [productFindState, setProductFindState] = React.useState<Product[]>([]);
+    const [productFindState2, setProductFindState2] = React.useState<Product[]>([]);
     const [createState, setCreateState] = React.useState("");
     const categoryIdRef = React.useRef(null);
 
@@ -47,10 +47,11 @@ export const AdminProduct: React.FC<Props> = ({data, category, product}) => {
             }
             setProductFindState(array);
             setProductFindState2(array);
+            setCreateState('')
         }
     }, [product]);
 
-    const productItem = (item : any) => {
+    const productFind = (item : any) => {
         let array = []
         for (let i = 0; i < productState.length; i++) {
             if (productState[i].categoryId === item.id) {
@@ -67,7 +68,7 @@ export const AdminProduct: React.FC<Props> = ({data, category, product}) => {
 
     const eventHandler = (data: any, value: any) => {
         setProductFindState2(
-            productStateFind.map((item) =>
+            productFindState.map((item) =>
                 item.id === data.id ? {...item, name: value} : item
             )
         )
@@ -143,7 +144,7 @@ export const AdminProduct: React.FC<Props> = ({data, category, product}) => {
                     <Title text={`Category List`} size="md" className="font-bold"/>
                     {category.map((item) => (
                         <div key={item.id} className="flex w-full max-w-sm items-center space-x-2 mb-1">
-                            <Button onClick={() => productItem(item)}>{item.name}</Button>
+                            <Button onClick={() => productFind(item)}>{item.name}</Button>
                         </div>
                     ))}
                 </div>
@@ -152,17 +153,17 @@ export const AdminProduct: React.FC<Props> = ({data, category, product}) => {
                     <Title text={`${categoryNameState}`} size="md" className="font-bold"/>
                     <Title text={`Product Edit`} size="xs" />
 
-                    {categoryIdRef.current !== null && productStateFind.map((item, index) => (
+                    {categoryIdRef.current !== null && productFindState.map((item, index) => (
                         <div key={item.id} className="flex w-full max-w-sm items-center space-x-2 mb-1">
                             <p>{item.id}</p>
                             <Input type='text'
                                    defaultValue={item.name}
-                                   onChange={e => eventHandler(productStateFind[index], e.target.value)}
+                                   onChange={e => eventHandler(productFindState[index], e.target.value)}
                             />
                             <Button
                                 type="submit"
-                                disabled={productStateFind[index].name === productStateFind2[index].name}
-                                onClick={() => eventSubmitUpdate(productStateFind2[index])}
+                                disabled={productFindState[index].name === productFindState2[index].name}
+                                onClick={() => eventSubmitUpdate(productFindState2[index])}
                             >Up</Button>
                             <Button
                                 type="submit"
@@ -185,6 +186,7 @@ export const AdminProduct: React.FC<Props> = ({data, category, product}) => {
                             />
                             <Button
                                 type="submit"
+                                disabled={createState === ''}
                                 onClick={eventSubmitCreate}
                             >Add</Button>
                         </div>

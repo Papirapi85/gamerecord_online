@@ -353,14 +353,14 @@ export async function productCreate(data: any) {
     let product;
     let productNameFind;
     try {
-        productNameFind = await prisma.product.findFirst({
-            where: {
-                name: data.name,
-            }
-        });
-        if (productNameFind) {
-            throw new Error('product already exists');
-        }
+        // productNameFind = await prisma.product.findFirst({
+        //     where: {
+        //         name: data.name,
+        //     }
+        // });
+        // if (productNameFind) {
+        //     throw new Error('product already exists');
+        // }
 
         product = await prisma.product.create({
             data: {
