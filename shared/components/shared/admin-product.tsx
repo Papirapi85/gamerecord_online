@@ -93,7 +93,6 @@ export const AdminProduct: React.FC<Props> = ({data, category, product}) => {
                 icon: '❌',
             });
         }
-        redirect(`/admin/product`)
     }
 
     const eventSubmitDelete = async (item: any) => {
@@ -109,7 +108,6 @@ export const AdminProduct: React.FC<Props> = ({data, category, product}) => {
                 icon: '❌',
             });
         }
-        redirect(`/admin/product`)
     }
 
     const eventSubmitUpdate = async (data: any) => {
@@ -131,7 +129,6 @@ export const AdminProduct: React.FC<Props> = ({data, category, product}) => {
                 icon: '❌',
             });
         }
-        redirect(`/admin/product`)
     }
 
     return (

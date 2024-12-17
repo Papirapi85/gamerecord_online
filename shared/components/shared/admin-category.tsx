@@ -42,7 +42,6 @@ export const AdminCategory: React.FC<Props> = ({data, category}) => {
     }, [category]);
 
 
-
     const eventHandler = (categoryIndex: any, value: any) => {
         setCategories2(
             categories.map((item) =>
@@ -72,7 +71,6 @@ export const AdminCategory: React.FC<Props> = ({data, category}) => {
                 icon: '❌',
             });
         }
-        redirect(`/admin/category`)
     }
 
     const eventSubmitDelete = async (id: any) => {
@@ -92,7 +90,6 @@ export const AdminCategory: React.FC<Props> = ({data, category}) => {
                 icon: '❌',
             });
         }
-        redirect(`/admin/category`)
     }
 
     const eventSubmitUpdate = async (categories2Index: any) => {
@@ -120,11 +117,7 @@ export const AdminCategory: React.FC<Props> = ({data, category}) => {
                 icon: '❌',
             });
         }
-
-        redirect(`/admin/category`)
     }
-
-
 
 
     return (

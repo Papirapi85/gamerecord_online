@@ -261,6 +261,8 @@ export async function categoryUpdate(data: any) {
                 name: data.name,
             },
         });
+
+        revalidatePath('/admin/category')
     } catch (err) {
         console.log('Error [UPDATE_CATEGORY]', err);
         throw err;
@@ -289,6 +291,8 @@ export async function categoryCreate(data: any) {
             throw new Error('Category Error');
         }
 
+        revalidatePath('/admin/category')
+
     } catch (err) {
         console.log('Error [CREATE_CATEGORY]', err);
         throw err;
@@ -313,7 +317,7 @@ export async function categoryDelete(data: any) {
                 id: Number(data.id),
             }
         })
-
+        revalidatePath('/admin/category')
     } catch (err) {
         console.log('Error [CREATE_CATEGORY]', err);
         throw err;
@@ -344,6 +348,7 @@ export async function productUpdate(data: any) {
                 name: data.name,
             },
         });
+        revalidatePath('/admin/product')
     } catch (err) {
         console.log('Error [UPDATE_PRODUCT]', err);
         throw err;
@@ -372,6 +377,7 @@ export async function productCreate(data: any) {
         if (!product) {
             throw new Error('Product Error');
         }
+        revalidatePath('/admin/product')
     } catch (err) {
         console.log('Error [PRODUCT_CATEGORY]', err);
         throw err;
@@ -393,6 +399,7 @@ export async function productDelete(data: any) {
                 id: Number(data.id),
             }
         })
+        revalidatePath('/admin/product')
     } catch (err) {
         console.log('Error [CREATE_PRODUCT]', err);
         throw err;
