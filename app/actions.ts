@@ -1,5 +1,4 @@
 'use server';
-
 import {prisma} from '@/prisma/prisma-client';
 import {PayOrderTemplate} from '@/shared/components';
 import {VerificationUserTemplate} from '@/shared/components/shared/email-temapltes/verification-user';
@@ -199,7 +198,6 @@ export async function registerUser(body: Prisma.UserCreateInput) {
     }
 }
 
-
 export async function createBlopAction(data: { newBlob: PutBlobResult }) {
     let post
     try {
@@ -223,7 +221,6 @@ export async function createBlopAction(data: { newBlob: PutBlobResult }) {
     revalidatePath('/')
     redirect(`/blop/list-data`)
 }
-
 export async function deleteBlopAction(data: { id: Number }) {
     let post
     try {
@@ -239,7 +236,6 @@ export async function deleteBlopAction(data: { id: Number }) {
 
     }
 }
-
 
 export async function categoryUpdate(data: any) {
     try {
@@ -270,7 +266,6 @@ export async function categoryUpdate(data: any) {
         throw err;
     }
 }
-
 export async function categoryCreate(data: any) {
     let category;
     let categoryNameFind;
@@ -280,7 +275,6 @@ export async function categoryCreate(data: any) {
                 name: data.name,
             }
         })
-        console.log(categoryNameFind);
         if (categoryNameFind) {
             throw new Error('Данная категория уже существует');
         }
@@ -300,7 +294,6 @@ export async function categoryCreate(data: any) {
         throw err;
     }
 }
-
 export async function categoryDelete(data: any) {
 
     let categoryDelete;
@@ -323,6 +316,85 @@ export async function categoryDelete(data: any) {
 
     } catch (err) {
         console.log('Error [CREATE_CATEGORY]', err);
+        throw err;
+    }
+}
+
+export async function productUpdate(data: any) {
+    try {
+        const product = await prisma.product.findFirst({
+            where: {
+                id: Number(data.id),
+            },
+        });
+
+        if (!product) {
+            throw new Error('product not found');
+        }
+
+        if (product.name === data.name) {
+            throw new Error('No update, data identical.');
+        }
+
+        await prisma.product.update({
+            where: {
+                id: Number(data.id),
+            },
+            data: {
+                name: data.name,
+            },
+        });
+    } catch (err) {
+        console.log('Error [UPDATE_PRODUCT]', err);
+        throw err;
+    }
+}
+export async function productCreate(data: any) {
+    let product;
+    let productNameFind;
+    try {
+        productNameFind = await prisma.product.findFirst({
+            where: {
+                name: data.name,
+            }
+        });
+        if (productNameFind) {
+            throw new Error('product already exists');
+        }
+
+        product = await prisma.product.create({
+            data: {
+                name: data.name,
+                categoryId: data.categoryId,
+                imageUrl: null,
+            }
+        });
+        if (!product) {
+            throw new Error('Product Error');
+        }
+    } catch (err) {
+        console.log('Error [PRODUCT_CATEGORY]', err);
+        throw err;
+    }
+}
+export async function productDelete(data: any) {
+    let product;
+    try {
+        product = await prisma.product.findFirst({
+            where: {
+                id: Number(data.id),
+            },
+        });
+        if (!product) {
+            throw new Error('Product delete Error');
+        }
+        await prisma.product.delete({
+            where: {
+                id: Number(data.id),
+            }
+        })
+    } catch (err) {
+        console.log('Error [CREATE_PRODUCT]', err);
         throw err;
     }
 }
