@@ -18,37 +18,37 @@ import {DropmenuAdmin} from "@/components/dropmenu-admin";
 
 
 interface Props {
-  hasSearch?: boolean;
-  hasCart?: boolean;
+  // hasSearch?: boolean;
+  // hasCart?: boolean;
   className?: string;
 }
 
-export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, className }) => {
-  const router = useRouter();
+export const Header: React.FC<Props> = ({ className }) => {
+  //const router = useRouter();
   const [openAuthModal, setOpenAuthModal] = React.useState(false);
 
-  const searchParams = useSearchParams();
-
-  React.useEffect(() => {
-    let toastMessage = '';
-
-    if (searchParams.has('paid')) {
-      toastMessage = 'Заказ успешно оплачен! Информация отправлена на почту.';
-    }
-
-    if (searchParams.has('verified')) {
-      toastMessage = 'Почта успешно подтверждена!';
-    }
-
-    if (toastMessage) {
-      setTimeout(() => {
-        router.replace('/');
-        toast.success(toastMessage, {
-          duration: 3000,
-        });
-      }, 1000);
-    }
-  }, []);
+  // const searchParams = useSearchParams();
+  //
+  // React.useEffect(() => {
+  //   let toastMessage = '';
+  //
+  //   if (searchParams.has('paid')) {
+  //     toastMessage = 'Заказ успешно оплачен! Информация отправлена на почту.';
+  //   }
+  //
+  //   if (searchParams.has('verified')) {
+  //     toastMessage = 'Почта успешно подтверждена!';
+  //   }
+  //
+  //   if (toastMessage) {
+  //     setTimeout(() => {
+  //       router.replace('/');
+  //       toast.success(toastMessage, {
+  //         duration: 3000,
+  //       });
+  //     }, 1000);
+  //   }
+  // }, []);
 
   return (
     <header className={cn('border-b', className)}>

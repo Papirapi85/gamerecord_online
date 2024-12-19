@@ -1,25 +1,11 @@
 'use client';
-
-import {zodResolver} from '@hookform/resolvers/zod';
 import React, {useEffect} from 'react';
-import {FormProvider, useForm} from 'react-hook-form';
-import {TFormRegisterValues, formRegisterSchema} from './modals/auth-modal/forms/schemas';
 import {Category, Product, ProductItem, User} from '@prisma/client';
 import toast from 'react-hot-toast';
-import {signOut} from 'next-auth/react';
 import {Container} from './container';
 import {Title} from './title';
-import {FormInput} from './form';
 import {Button, Input} from '../ui';
-import {
-    categoryUpdate,
-    categoryCreate,
-    categoryDelete,
-    productCreate,
-    productUpdate,
-    productDelete
-} from '@/app/actions';
-import {redirect} from "next/navigation";
+import {productItemDelete, productItemUpdate, productItemCreate} from '@/app/actions';
 
 
 interface Props {
@@ -46,22 +32,8 @@ export const AdminProductItem: React.FC<Props> = ({data, category, product, prod
     const productIdRef = React.useRef(null);
 
     useEffect(() => {
-        let array: Product[] = []
-        if(categoryIdRef.current !== null) {
-            for (let i = 0; i < product.length; i++) {
-                if (product[i].categoryId === categoryIdRef.current) {
-                    array.push(product[i]);
-                }
-            }
-            setProductFindState(array);
-            setCreateState('')
-        }
-    }, [product]);
-
-
-    useEffect(() => {
-        // setProductItemFindState(productItem);
-        // let array: Product[] = []
+        setProductItemState(productItem)
+        //let array: Product[] = []
         // if(categoryIdRef.current !== null) {
         //     for (let i = 0; i < product.length; i++) {
         //         if (product[i].categoryId === categoryIdRef.current) {
@@ -73,68 +45,40 @@ export const AdminProductItem: React.FC<Props> = ({data, category, product, prod
         // }
     }, [productItem]);
 
+
     const productFind = (item : any) => {
+        categoryIdRef.current = item.id;
         let array = []
         for (let i = 0; i < productState.length; i++) {
             if (productState[i].categoryId === item.id) {
                 array.push(productState[i]);
             }
         }
-        categoryIdRef.current = item.id;
         setProductFindState(array);
         setCategoryNameState(item.name);
     }
 
     const productItemFind = (item : any) => {
+        productIdRef.current = item.id;
+        //console.log(productIdRef.current);
         let array = []
         for (let i = 0; i < productItemState.length; i++) {
             if (productItemState[i].productId === item.id) {
                 array.push(productItemState[i]);
             }
         }
-
-        productIdRef.current = item.id;
         setProductItemFindState(array);
         setProductItemFindState2(array);
     }
 
-    const eventSubmitCreate = async () => {
-        try {
-            if(createState === '') {
-                return toast.error('Error create data, filed empty', {
-                    icon: '❌',
-                });
-            }
-            await productCreate({
-                name: createState,
-                categoryId: categoryIdRef.current,
-            });
-            toast.error('Data create 📝', {
-                icon: '✅',
-            });
-        } catch (error) {
-            return toast.error('Error create data', {
-                icon: '❌',
-            });
-        }
-        redirect(`/admin/product`)
-    }
 
-    const eventSubmitDelete = async (item: any) => {
-        try {
-            await productDelete({
-                id: item.id,
-            });
-            toast.error('Данные удалены📝', {
-                icon: '✅',
-            });
-        } catch (error) {
-            return toast.error('Ошибка при удалении данных', {
-                icon: '❌',
-            });
-        }
-        redirect(`/admin/product`)
-    }
+    const eventHandler = (data: any, value: any) => {
+        setProductItemFindState2(
+            productItemFindState.map((item) =>
+                item.id === data.id ? {...item, name: value} : item
+            )
+        )
+    };
 
     const eventSubmitUpdate = async (data: any) => {
         try {
@@ -143,7 +87,7 @@ export const AdminProductItem: React.FC<Props> = ({data, category, product, prod
                     icon: '❌',
                 });
             }
-            await productUpdate({
+            await productItemUpdate({
                 id: data.id,
                 name: data.name,
             });
@@ -155,7 +99,42 @@ export const AdminProductItem: React.FC<Props> = ({data, category, product, prod
                 icon: '❌',
             });
         }
-        redirect(`/admin/product`)
+    }
+    const eventSubmitDelete = async (item: any) => {
+        try {
+            await productItemDelete({
+                id: item.id,
+            });
+            toast.error('Данные удалены📝', {
+                icon: '✅',
+            });
+        } catch (error) {
+            return toast.error('Ошибка при удалении данных', {
+                icon: '❌',
+            });
+        }
+    }
+    const eventSubmitCreate = async () => {
+        try {
+            console.log('productIdRef.current ' + productIdRef.current)
+            if(createState === '') {
+                return toast.error('Error create data, filed empty', {
+                    icon: '❌',
+                });
+            }
+            console.log('createState ', createState);
+            await productItemCreate({
+                name: createState,
+                productId: productIdRef.current,
+            });
+            toast.error('Data create 📝', {
+                icon: '✅',
+            });
+        } catch (error) {
+            return toast.error('Error create data', {
+                icon: '❌',
+            });
+        }
     }
 
     return (
@@ -165,7 +144,7 @@ export const AdminProductItem: React.FC<Props> = ({data, category, product, prod
 
             {/*CATEGORY*/}
             <div className="flex">
-                <div className="w-[25%]">
+                <div className="flex-1 w-[20%]">
                     <Title text={`Category List`} size="md" className="font-bold"/>
                     {category.map((item) => (
                         <div key={item.id} className="flex w-full max-w-sm items-center space-x-2 mb-1">
@@ -175,7 +154,7 @@ export const AdminProductItem: React.FC<Props> = ({data, category, product, prod
                 </div>
 
                 {/*PRODUCT_LIST*/}
-                <div className="flex-1 w-[25%]">
+                <div className="flex-1 w-[20%]">
                     <Title text={`${categoryNameState}`} size="md" className="font-bold"/>
                     <Title text={`Product List`} size="xs"/>
                     {categoryIdRef.current !== null && productFindState.map((item, index) => (
@@ -189,32 +168,50 @@ export const AdminProductItem: React.FC<Props> = ({data, category, product, prod
                 </div>
 
                 {/*PRODUCT_ITEM_EDIT*/}
-                <div className="flex-1 w-[25%]">
+                <div className="flex-1 w-[30%]">
                     <Title text={`${categoryNameState}`} size="md" className="font-bold"/>
                     <Title text={`Product Item Edit`} size="xs"/>
                     {productIdRef.current !== null && productItemFindState.map((item, index) => (
                         <div key={item.id} className="flex w-full max-w-sm items-center space-x-2 mb-1">
-                            {/*<p>{item.id}</p>*/}
-                            <Button
-                                // onClick={e => eventHandler(productFindState[index], e.target.value)}
-                            >{item.name}</Button>
-                            {/*<Button*/}
-                            {/*    type="submit"*/}
-                            {/*    disabled={productFindState[index].name === productFindState2[index].name}*/}
-                            {/*    onClick={() => eventSubmitUpdate(productFindState2[index])}*/}
-                            {/*>Up</Button>*/}
-                            {/*<Button*/}
-                            {/*    type="submit"*/}
-                            {/*    onClick={() => eventSubmitDelete(item)}*/}
-                            {/*>Del</Button>*/}
+                            <div key={item.id} className="flex w-full max-w-sm items-center space-x-2 mb-1">
+                                <p>{item.id}</p>
+                                <Input type='text'
+                                       defaultValue={item.name}
+                                       onChange={e => eventHandler(productItemFindState[index], e.target.value)}
+                                />
+                                <Button
+                                    type="submit"
+                                    disabled={productItemFindState[index].name === productItemFindState2[index].name}
+                                    onClick={() => eventSubmitUpdate(productItemFindState2[index])}
+                                >Up</Button>
+                                <Button
+                                    type="submit"
+                                    onClick={() => eventSubmitDelete(item)}
+                                >Del</Button>
+                            </div>
                         </div>
                     ))}
                 </div>
 
                 {/*PRODUCT_ITEM_CREATE*/}
-                <div className="flex-1 w-[25%]">
+                <div className="flex-1 w-[25%] ml-5">
                     <Title text={`${categoryNameState}`} size="md" className="font-bold"/>
-                    <Title text={`Product Item Add`} size="xs"/>
+                    <Title text={`Product Add`} size="xs"/>
+                    {productIdRef.current !== null &&
+                        <div className="flex w-full max-w-sm items-center space-x-2 mb-1">
+                            <Input type='text'
+                                   value={createState}
+                                   onChange={e => {
+                                       setCreateState(e.target.value)
+                                   }}
+                            />
+                            <Button
+                                type="submit"
+                                disabled={createState === ''}
+                                onClick={eventSubmitCreate}
+                            >Add</Button>
+                        </div>
+                    }
                 </div>
             </div>
         </Container>

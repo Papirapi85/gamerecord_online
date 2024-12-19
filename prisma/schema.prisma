@@ -61,9 +61,10 @@ model Product {
 model ProductItem {
   id Int @id @default(autoincrement())
 
-  price     Int?
-  size      Int?
-  pizzaType Int?
+  price     Int?    @default(0)
+  size      Int?    @default(0)
+  pizzaType Int?    @default(0)
+  imageUrl  String? @default("null")
 
   cartItems   CartItem[]
   gameRecords GameRecords[]

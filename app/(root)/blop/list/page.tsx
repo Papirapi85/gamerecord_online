@@ -1,7 +1,7 @@
 import {list} from "@vercel/blob"
 import Image from "next/image";
 import { DeleteButton } from "@/components/deleteButton"
-import {Container, LeftBlockLinkCategory, ProductsGroupList} from "@/shared/components";
+import {Container, LeftBlockLinkCategory} from "@/shared/components";
 import {Suspense} from "react";
 
 export const dynamic = 'force-dynamic';

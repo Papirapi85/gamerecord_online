@@ -117,7 +117,8 @@ export async function createOrder(data: CheckoutFormValues) {
 
         return paymentUrl;
     } catch (err) {
-        console.log('[CreateOrder] Server error', err);
+        //console.log('[CreateOrder] Server error', err);
+        throw err;
     }
 }
 
@@ -146,7 +147,7 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
             },
         });
     } catch (err) {
-        console.log('Error [UPDATE_USER]', err);
+        //console.log('Error [UPDATE_USER]', err);
         throw err;
     }
 }
@@ -264,7 +265,7 @@ export async function categoryUpdate(data: any) {
 
         revalidatePath('/admin/category')
     } catch (err) {
-        console.log('Error [UPDATE_CATEGORY]', err);
+        //console.log('Error [UPDATE_CATEGORY]', err);
         throw err;
     }
 }
@@ -294,7 +295,7 @@ export async function categoryCreate(data: any) {
         revalidatePath('/admin/category')
 
     } catch (err) {
-        console.log('Error [CREATE_CATEGORY]', err);
+        //console.log('Error [CREATE_CATEGORY]', err);
         throw err;
     }
 }
@@ -319,7 +320,7 @@ export async function categoryDelete(data: any) {
         })
         revalidatePath('/admin/category')
     } catch (err) {
-        console.log('Error [CREATE_CATEGORY]', err);
+        //console.log('Error [CREATE_CATEGORY]', err);
         throw err;
     }
 }
@@ -350,38 +351,67 @@ export async function productUpdate(data: any) {
         });
         revalidatePath('/admin/product')
     } catch (err) {
-        console.log('Error [UPDATE_PRODUCT]', err);
+        //console.log('Error [UPDATE_PRODUCT]', err);
         throw err;
     }
 }
 export async function productCreate(data: any) {
     let product;
     let productNameFind;
+    let count;
+    let countFind;
+    let countFind2 = true;
     try {
-        // productNameFind = await prisma.product.findFirst({
-        //     where: {
-        //         name: data.name,
-        //     }
-        // });
-        // if (productNameFind) {
-        //     throw new Error('product already exists');
-        // }
+        console.log("111111111111111 " + data.categoryId);
+
+        productNameFind = await prisma.product.findFirst({
+            where: {
+                categoryId: data.categoryId,
+                name: data.name,
+            }
+        });
+
+
+        if (productNameFind) {
+            throw new Error('product already exists');
+        }
+
+        count = await prisma.product.count({});
+
+        console.log("2222222222222222 " + count);
+
+        do {
+            count = count + 1
+            console.log("count WHILE " + count);
+            countFind = await prisma.product.findFirst({
+                where: {
+                    id: Number(count),
+                }
+            });
+            console.log('countFind ' + countFind)
+            console.log("555555555555555555555 countFind " + countFind);
+        } while(countFind2);
+
+        console.log("3333333333333333 " + count);
 
         product = await prisma.product.create({
             data: {
+                id: Number(count),
                 name: data.name,
-                categoryId: data.categoryId,
-                imageUrl: null,
+                categoryId: Number(data.categoryId),
             }
         });
+        //console.log("4444444444444444")
         if (!product) {
             throw new Error('Product Error');
         }
         revalidatePath('/admin/product')
-    } catch (err) {
-        console.log('Error [PRODUCT_CATEGORY]', err);
-        throw err;
-    }
+        }   catch (error) {
+            if (error instanceof Error) {
+                console.log(error.stack);
+            }
+            throw new Error('Failed to record your interaction. Please try again.');
+        }
 }
 export async function productDelete(data: any) {
     let product;
@@ -401,7 +431,112 @@ export async function productDelete(data: any) {
         })
         revalidatePath('/admin/product')
     } catch (err) {
-        console.log('Error [CREATE_PRODUCT]', err);
+        //console.log('Error [CREATE_PRODUCT]', err);
+        throw err;
+    }
+}
+
+export async function productItemUpdate(data: any) {
+    try {
+        const product = await prisma.productItem.findFirst({
+            where: {
+                id: Number(data.id),
+            },
+        });
+
+        if (!product) {
+            throw new Error('product not found');
+        }
+
+        if (product.name === data.name) {
+            throw new Error('No update, data identical.');
+        }
+
+        await prisma.productItem.update({
+            where: {
+                id: Number(data.id),
+            },
+            data: {
+                name: data.name,
+            },
+        });
+        revalidatePath('/admin/product')
+    } catch (err) {
+        //console.log('Error [UPDATE_PRODUCT]', err);
+        throw err;
+    }
+}
+export async function productItemCreate(data: any) {
+    let product;
+    let productNameFind;
+    let countFind;
+    let count;
+    try {
+        productNameFind = await prisma.productItem.findFirst({
+            where: {
+                name: data.name,
+                productId: Number(data.productId),
+            }
+        });
+
+        // count = await prisma.productItem.count({});
+        // console.log("count = " + count);
+        // while(!countFind) {
+        //     count++
+        //     console.log("count WHILE " + count);
+        //     countFind = await prisma.productItem.findFirst({
+        //         where: {
+        //             id: count
+        //         }
+        //     });
+        // }
+        // console.log("1111111111111 = " + Number(data.productId))
+
+        if (productNameFind) {
+            throw new Error('product already exists');
+        }else {
+            console.log("2222222222222  productId " + data.productId + "   name " + data.name);
+
+            product = await prisma.productItem.create({
+                data: {
+                    // id: count,
+                    name: data.name,
+                    productId: Number(data.productId),
+                }
+            });
+            console.log("333333333333")
+            if (!product) {
+                throw new Error('Product Error');
+            }
+        }
+
+        revalidatePath('/admin/product')
+    } catch (error) {
+        if (error instanceof Error) {
+            console.log(error.stack);
+        }
+        throw new Error('Failed to record your interaction. Please try again.');
+    }
+}
+export async function productItemDelete(data: any) {
+    let product;
+    try {
+        product = await prisma.productItem.findFirst({
+            where: {
+                id: Number(data.id),
+            },
+        });
+        if (!product) {
+            throw new Error('Product delete Error');
+        }
+        await prisma.productItem.delete({
+            where: {
+                id: Number(data.id),
+            }
+        })
+        revalidatePath('/admin/product')
+    } catch (err) {
+        //console.log('Error [CREATE_PRODUCT]', err);
         throw err;
     }
 }

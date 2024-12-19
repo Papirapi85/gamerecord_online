@@ -39,6 +39,7 @@ export const AdminProduct: React.FC<Props> = ({data, category, product}) => {
 
     useEffect(() => {
         let array: Product[] = []
+        setProductState(product)
         if(categoryIdRef.current !== null) {
             for (let i = 0; i < product.length; i++) {
                 if (product[i].categoryId === categoryIdRef.current) {

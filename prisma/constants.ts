@@ -117,7 +117,7 @@ export const products = [
     "updatedAt": "2024-09-06T23:14:01.027Z"
   },
   {
-    "id": 16,
+    "id": 6,
     "name": "NFS Hot Pursuit Remastered",
     "categoryId": 1,
     "createdAt": "2024-10-23T19:24:50.800Z",
